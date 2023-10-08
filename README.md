@@ -1,5 +1,4 @@
-[![Tests](../../actions/workflows/tests-13-sprint.yml/badge.svg)](../../actions/workflows/tests-13-sprint.yml) [![Tests](../../actions/workflows/tests-14-sprint.yml/badge.svg)](../../actions/workflows/tests-14-sprint.yml)
-# Проект Mesto фронтенд + бэкенд
+# Проект Movies (бэкенд)
 
 
 ## Директории
@@ -12,7 +11,7 @@
 
 ## Клонирование проекта
 
-1. git clone https://github.com/raamat/express-mesto-gha.git (команда кланирования)
+1. git clone https://github.com/raamat/movies-explorer-api.git (команда кланирования)
 2. npm i (установка зависимостей)
 
 ## Запуск проекта
@@ -23,4 +22,4 @@
 
 ## Ссылка на репозиторий
 
-https://github.com/raamat/express-mesto-gha
+https://github.com/raamat/movies-explorer-api.git
