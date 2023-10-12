@@ -25,7 +25,7 @@ https://github.com/raamat/movies-explorer-api.git
 
 ## Ссылка API
 
-https://movies.raamat.pw
+https://api.movies.raamat.pw
 
 ## Роуты API
 
