@@ -2,25 +2,9 @@ const { celebrate, Joi } = require('celebrate');
 
 const REGULAR_EXPRESSION = /https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}/i;
 
-const validationGetUserById = celebrate({
-  params: Joi.object().keys({
-    id: Joi
-      .string()
-      .hex()
-      .message('Идентификатор пользователя должен быть в 16-ричной системе')
-      .length(24)
-      .message('Длина идентификатора пользователя должна быть 24 символа'),
-  }),
-});
-
 const validationCreateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi
-      .string()
-      .regex(REGULAR_EXPRESSION)
-      .message('Недопустимый URL'),
     email: Joi.string().email().required().min(5),
     password: Joi.string().required().min(8),
   }),
@@ -36,48 +20,50 @@ const validationLogin = celebrate({
 const validationUpdateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    about: Joi.string().required().min(2).max(30),
+    email: Joi.string().email().required().min(5),
   }),
 });
 
-const validationUpdateAvatar = celebrate({
+const validationCreateMovie = celebrate({
   body: Joi.object().keys({
-    avatar: Joi
-      .string()
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.number().required(),
+    year: Joi.string().required(),
+    description: Joi.string().required(),
+    image: Joi.string()
       .required()
       .regex(REGULAR_EXPRESSION)
-      .message('Недопустимый URL'),
-  }),
-});
-
-const validationCreateCard = celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    link: Joi
-      .string()
+      .message('Недопустимый URL ссылки на постер'),
+    trailerLink: Joi.string()
       .required()
       .regex(REGULAR_EXPRESSION)
-      .message('Недопустимый URL'),
+      .message('Недопустимый URL ссылки на трейлер фильма'),
+    thumbnail: Joi.string()
+      .required()
+      .regex(REGULAR_EXPRESSION)
+      .message('Недопустимый URL ссылки на миниатюру постера к фильму'),
+    movieId: Joi.number().required(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }),
 });
 
-const validationCardId = celebrate({
+const validationMovieId = celebrate({
   params: Joi.object().keys({
-    cardId: Joi
-      .string()
+    movieId: Joi.string()
       .hex()
-      .message('Идентификатор карточки должен быть в 16-ричной системе')
+      .message('Идентификатор фильма должен быть в 16-ричной системе')
       .length(24)
-      .message('Длина идентификатора карточки должна быть 24 символа'),
+      .message('Длина идентификатора фильма должна быть 24 символа')
+      .required(),
   }),
 });
 
 module.exports = {
-  validationGetUserById,
   validationCreateUser,
   validationLogin,
   validationUpdateUser,
-  validationUpdateAvatar,
-  validationCreateCard,
-  validationCardId,
+  validationCreateMovie,
+  validationMovieId,
 };
