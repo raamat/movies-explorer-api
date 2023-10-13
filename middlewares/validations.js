@@ -5,14 +5,14 @@ const REGULAR_EXPRESSION = /https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+
 const validationCreateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
-    email: Joi.string().email().required().min(5),
+    email: Joi.string().email().required(),
     password: Joi.string().required().min(8),
   }),
 });
 
 const validationLogin = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().email().required().min(5),
+    email: Joi.string().email().required(),
     password: Joi.string().required().min(8),
   }),
 });
@@ -20,7 +20,7 @@ const validationLogin = celebrate({
 const validationUpdateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    email: Joi.string().email().required().min(5),
+    email: Joi.string().email().required(),
   }),
 });
 
