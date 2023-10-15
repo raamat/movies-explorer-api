@@ -78,6 +78,10 @@ module.exports.updateUser = (req, res, next) => {
       } else
         if (err instanceof mongoose.Error.DocumentNotFoundError) {
           next(new NotFoundError('Нет пользователя с таким id'));
+        } else if (err.code === 11000) {
+          return next(
+            new ConflictError('Пользователь с таким email уже зарегистрирован'),
+          );
         } else { next(err); }
     });
 };
